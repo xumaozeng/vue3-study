@@ -4,6 +4,15 @@
   <p>{{ doubleCounter }}</p>
   <p>{{ msg2 }}</p>
   <p ref="desc"></p>
+
+  <!-- Teleport：ModalButton -->
+  <modal-button></modal-button>
+
+  <!-- Emits -->
+  <emits @my-click="onClick"></emits>
+
+  <!-- 实例方法定义组件 -->
+  <comp></comp>
 </template>
 
 <script>
@@ -16,7 +25,10 @@ import {
   toRefs,
   watch,
 } from "vue";
+import ModalButton from "./ModalButton.vue";
+import Emits from "./Emits.vue";
 export default {
+  components: { ModalButton, Emits },
   name: "HelloWorld",
   props: {
     msg: String,
@@ -38,6 +50,11 @@ export default {
     });
 
     return { counter, doubleCounter, msg2, desc };
+  },
+  methods: {
+    onClick(e) {
+      console.log(e);
+    },
   },
 };
 
