@@ -6,13 +6,19 @@
   <p ref="desc"></p>
 
   <!-- Teleport：ModalButton -->
-  <modal-button></modal-button>
+  <modal-button />
 
   <!-- Emits -->
-  <emits @my-click="onClick"></emits>
+  <emits @my-click="onClick" />
 
   <!-- 实例方法定义组件 -->
-  <comp></comp>
+  <comp />
+
+  <!-- v-model的使用 -->
+  <vmodel-test v-model="modelValue" />
+
+  <!-- 异步组件的使用 -->
+  <async-component />
 </template>
 
 <script>
@@ -24,14 +30,27 @@ import {
   ref,
   toRefs,
   watch,
+  defineAsyncComponent,
 } from "vue";
 import ModalButton from "./ModalButton.vue";
 import Emits from "./Emits.vue";
+import VmodelTest from "./VmodelTest.vue";
+
 export default {
-  components: { ModalButton, Emits },
+  components: {
+    ModalButton,
+    Emits,
+    VmodelTest,
+    AsyncComponent: defineAsyncComponent(() => import("./AsyncComponent.vue")),
+  },
   name: "HelloWorld",
   props: {
     msg: String,
+  },
+  data() {
+    return {
+      modelValue: 0,
+    };
   },
   setup() {
     // counter相关
